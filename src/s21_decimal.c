@@ -558,13 +558,16 @@ int is_all_zero_mul(s21_decimal value_1, s21_decimal value_2) {
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int res = 0;
-  int sign_one = get_sign(value_1);
-  int sign_two = get_sign(value_2);
+  int sign_one = 0;
+  int sign_two = 0;
   int res_sign = 0;
   unsigned int scale = 0;
   BIG_decimal one = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal sum = {{0, 0, 0, 0, 0, 0}};
+
+  sign_one = get_sign(value_1);
+  sign_two = get_sign(value_2);
 
   if (!two_dec_to_big(value_1, value_2, &one, &two, &scale, ADD_SUB)) {
     if ((sign_one + sign_two) == 2) {
@@ -597,13 +600,16 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int res = 0;
-  int sign_one = get_sign(value_1);
-  int sign_two = get_sign(value_2);
+  int sign_one = 0;
+  int sign_two = 0;
   int res_sign = 0;
   unsigned int scale = 0;
   BIG_decimal one = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal sum = {{0, 0, 0, 0, 0, 0}};
+
+  sign_one = get_sign(value_1);
+  sign_two = get_sign(value_2);
 
   if (!two_dec_to_big(value_1, value_2, &one, &two, &scale, ADD_SUB)) {
     if (sign_one == -1 && sign_two == 1) {
@@ -641,13 +647,16 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
 int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int res = 0;
-  int sign_one = get_sign(value_1);
-  int sign_two = get_sign(value_2);
+  int sign_one = 0;
+  int sign_two = 0;
   int res_sign = 0;
   unsigned int scale = 0;
   BIG_decimal one = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal mul = {{0, 0, 0, 0, 0, 0}};
+
+  sign_one = get_sign(value_1);
+  sign_two = get_sign(value_2);
 
   if (is_all_zero_mul(value_1, value_2)) {
     result->bits[0] = 0;
@@ -676,15 +685,20 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
 int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int res = 0;
-  int sign_one = get_sign(value_1);
-  int sign_two = get_sign(value_2);
+  int sign_one = 0;
+  int sign_two = 0;
   int res_sign = 0;
   unsigned int scale = 0;
-  unsigned int scale_1 = get_scale(value_1);
-  unsigned int scale_2 = get_scale(value_2);
+  unsigned int scale_1 = 0;
+  unsigned int scale_2 = 0;
   BIG_decimal one = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal div = {{0, 0, 0, 0, 0, 0}};
+
+  sign_one = get_sign(value_1);
+  sign_two = get_sign(value_2);
+  scale_1 = get_scale(value_1);
+  scale_2 = get_scale(value_2);
 
   if (dec_is_zero(value_2)) {
     res = 3;
@@ -727,12 +741,14 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
 
 int s21_is_less(s21_decimal one, s21_decimal two) {
   int res = 0;
-  int sign_one = get_sign(one);
-  int sign_two = get_sign(two);
+  int sign_one = 0;
+  int sign_two = 0;
   unsigned int scale = 0;
   BIG_decimal bone = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal btwo = {{0, 0, 0, 0, 0, 0}};
 
+  sign_one = get_sign(one);
+  sign_two = get_sign(two);
   two_dec_to_big(one, two, &bone, &btwo, &scale, ADD_SUB);
 
   if (big_is_zero(bone) && big_is_zero(btwo)) {
@@ -784,12 +800,14 @@ int s21_is_greater_or_equal(s21_decimal one, s21_decimal two) {
 
 int s21_is_equal(s21_decimal one, s21_decimal two) {
   int res = 0;
-  int sign_one = get_sign(one);
-  int sign_two = get_sign(two);
+  int sign_one = 0;
+  int sign_two = 0;
   unsigned int scale = 0;
   BIG_decimal bone = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal btwo = {{0, 0, 0, 0, 0, 0}};
 
+  sign_one = get_sign(one);
+  sign_two = get_sign(two);
   two_dec_to_big(one, two, &bone, &btwo, &scale, ADD_SUB);
 
   if (big_is_zero(bone) && big_is_zero(btwo)) {
@@ -833,7 +851,9 @@ int s21_from_int_to_decimal(int src, s21_decimal *dst) {
 
 int s21_from_decimal_to_int(s21_decimal src, int *dst) {
   int res = 0;
-  int sign = get_sign(src);
+  int sign = 0;
+
+  sign = get_sign(src);
 
   if (!s21_truncate(src, &src)) {
     if (src.bits[1] == 0 && src.bits[2] == 0) {
@@ -866,9 +886,12 @@ double my_pow_of_two(int count) {
 
 int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   int res = 0;
-  int sign = get_sign(src);
-  int scale = get_scale(src);
+  int sign = 0;
+  int scale = 0;
   double copy = 0;
+
+  sign = get_sign(src);
+  scale = get_scale(src);
 
   if (scale <= 28) {
     for (int i = 0; i <= 95 && !res; i++) {
@@ -891,8 +914,11 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
 
 int s21_floor(s21_decimal value, s21_decimal *result) {
   int res = 0;
-  int sign = get_sign(value);
-  unsigned int scale = get_scale(value);
+  int sign = 0;
+  unsigned int scale = 0;
+
+  sign = get_sign(value);
+  scale = get_scale(value);
 
   if (scale != 0) {
     if (sign == 1) {
@@ -914,10 +940,13 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
 
 int s21_round(s21_decimal value, s21_decimal *result) {
   int res = 0;
-  int sign = get_sign(value);
-  unsigned int scale = get_scale(value);
+  int sign = 0;
+  unsigned int scale = 0;
   int fraction = 0;
   BIG_decimal copy = {{0, 0, 0, 0, 0, 0}};
+
+  sign = get_sign(value);
+  scale = get_scale(value);
 
   if (scale != 0) {
     if (set_scale(0, &value)) {
@@ -941,9 +970,12 @@ int s21_round(s21_decimal value, s21_decimal *result) {
 
 int s21_truncate(s21_decimal value, s21_decimal *result) {
   int res = 0;
-  int sign = get_sign(value);
-  unsigned int scale = get_scale(value);
+  int sign = 0;
+  unsigned int scale = 0;
   BIG_decimal copy = {{0, 0, 0, 0, 0, 0}};
+
+  sign = get_sign(value);
+  scale = get_scale(value);
 
   if (scale != 0) {
     if (set_scale(0, &value)) {
@@ -987,7 +1019,7 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
   if (src != src || src == 1.0 / 0.0 || src == -1.0 / 0.0) {
     res = 1;
   } else {
-    int sign = src >= 0 ? 1 : -1;
+    int sign = 0;
     char str[30] = "\0";
     char num[8] = "\0";
     char scale[3] = "\0";
@@ -995,6 +1027,8 @@ int s21_from_float_to_decimal(float src, s21_decimal *dst) {
     unsigned int res_scale = 6;
     s21_decimal copy = {{0, 0, 0, 0}};
     s21_decimal ten = {{10, 0, 0, 0}};
+
+    sign = src >= 0 ? 1 : -1;
 
     if (sign == -1) src *= -1;
     sprintf(str, "%.6e", src);
