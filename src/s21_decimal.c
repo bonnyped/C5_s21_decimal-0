@@ -556,6 +556,13 @@ int is_all_zero_mul(s21_decimal value_1, s21_decimal value_2) {
   return res;
 }
 
+void clear_result(s21_decimal *result) {
+  result->bits[0] = 0;
+  result->bits[1] = 0;
+  result->bits[2] = 0;
+  result->bits[3] = 0;
+}
+
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   int res = 0;
   int sign_one = 0;
@@ -566,6 +573,7 @@ int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal sum = {{0, 0, 0, 0, 0, 0}};
 
+  clear_result(result);
   sign_one = get_sign(value_1);
   sign_two = get_sign(value_2);
 
@@ -608,6 +616,7 @@ int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal sum = {{0, 0, 0, 0, 0, 0}};
 
+  clear_result(result);
   sign_one = get_sign(value_1);
   sign_two = get_sign(value_2);
 
@@ -655,6 +664,7 @@ int s21_mul(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal mul = {{0, 0, 0, 0, 0, 0}};
 
+  clear_result(result);
   sign_one = get_sign(value_1);
   sign_two = get_sign(value_2);
 
@@ -695,6 +705,7 @@ int s21_div(s21_decimal value_1, s21_decimal value_2, s21_decimal *result) {
   BIG_decimal two = {{0, 0, 0, 0, 0, 0}};
   BIG_decimal div = {{0, 0, 0, 0, 0, 0}};
 
+  clear_result(result);
   sign_one = get_sign(value_1);
   sign_two = get_sign(value_2);
   scale_1 = get_scale(value_1);
@@ -834,6 +845,8 @@ int s21_is_not_equal(s21_decimal one, s21_decimal two) {
 int s21_from_int_to_decimal(int src, s21_decimal *dst) {
   int res = 0;
 
+  clear_result(dst);
+
   if (src == MIN_INT) {
     dst->bits[0] = MIN_INT;
     dst->bits[1] = 0;
@@ -853,6 +866,7 @@ int s21_from_decimal_to_int(s21_decimal src, int *dst) {
   int res = 0;
   int sign = 0;
 
+  *dst = 0;
   sign = get_sign(src);
 
   if (!s21_truncate(src, &src)) {
@@ -888,8 +902,9 @@ int s21_from_decimal_to_float(s21_decimal src, float *dst) {
   int res = 0;
   int sign = 0;
   int scale = 0;
-  double copy = 0;
+  double copy = 0.0;
 
+  *dst = 0.0;
   sign = get_sign(src);
   scale = get_scale(src);
 
@@ -917,6 +932,7 @@ int s21_floor(s21_decimal value, s21_decimal *result) {
   int sign = 0;
   unsigned int scale = 0;
 
+  clear_result(result);
   sign = get_sign(value);
   scale = get_scale(value);
 
@@ -945,6 +961,7 @@ int s21_round(s21_decimal value, s21_decimal *result) {
   int fraction = 0;
   BIG_decimal copy = {{0, 0, 0, 0, 0, 0}};
 
+  clear_result(result);
   sign = get_sign(value);
   scale = get_scale(value);
 
@@ -974,6 +991,7 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
   unsigned int scale = 0;
   BIG_decimal copy = {{0, 0, 0, 0, 0, 0}};
 
+  clear_result(result);
   sign = get_sign(value);
   scale = get_scale(value);
 
@@ -1000,6 +1018,8 @@ int s21_truncate(s21_decimal value, s21_decimal *result) {
 int s21_negate(s21_decimal value, s21_decimal *result) {
   int res = 0;
 
+  clear_result(result);
+
   if (get_scale(value) > 28) {
     res = 1;
   } else if (get_sign(value) == 1) {
@@ -1015,6 +1035,8 @@ int s21_negate(s21_decimal value, s21_decimal *result) {
 
 int s21_from_float_to_decimal(float src, s21_decimal *dst) {
   int res = 0;
+
+  clear_result(dst);
 
   if (src != src || src == 1.0 / 0.0 || src == -1.0 / 0.0) {
     res = 1;

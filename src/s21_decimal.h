@@ -65,6 +65,7 @@ int bank_rounding(BIG_decimal *value, int last_num, int last_num_count);
 void zero_deleting(BIG_decimal *value, unsigned int *scale);
 int is_all_zero_mul(s21_decimal value_1, s21_decimal value_2);
 double my_pow_of_two(int count);
+void clear_result(s21_decimal *result);
 
 int s21_add(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
 int s21_sub(s21_decimal value_1, s21_decimal value_2, s21_decimal *result);
