@@ -1,0 +1,15 @@
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/bin/Debug/net7.0/sharp_test
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/bin/Debug/net7.0/sharp_test.deps.json
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/bin/Debug/net7.0/sharp_test.runtimeconfig.json
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/bin/Debug/net7.0/sharp_test.dll
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/bin/Debug/net7.0/sharp_test.pdb
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.csproj.AssemblyReference.cache
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.GeneratedMSBuildEditorConfig.editorconfig
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.AssemblyInfoInputs.cache
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.AssemblyInfo.cs
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.csproj.CoreCompileInputs.cache
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.dll
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/refint/sharp_test.dll
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.pdb
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/sharp_test.genruntimeconfig.cache
+/home/blackzhek/code/school_21/C5_s21_decimal-0/src/tests/sharp_test/obj/Debug/net7.0/ref/sharp_test.dll
