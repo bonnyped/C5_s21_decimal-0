@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -std=c11
 OS := $(shell uname)
 CHECK_FLAGS = $(shell pkg-config --cflags --libs check)
 
-all: clean s21_decimal.a test gcov_report
+all: clean s21_decimal.a test
 
 s21_decimal.a: s21_decimal.o
 	ar rcs s21_decimal.a s21_decimal.o
@@ -13,12 +13,14 @@ s21_decimal.o: s21_decimal.c
 
 test: test.o s21_decimal.a
 	$(CC) $(CFLAGS) test.o s21_decimal.a -o test $(CHECK_FLAGS)
+	./test
 
 test.o: test.c
 	$(CC) $(CFLAGS) -c test.c -o test.o
 
 test.c:
 	checkmk clean_mode=1 ./tests/include.file ./tests/bonus_test/*.check ./tests/task_test/*.check > test.c
+	clang-format -i -style=google test.c
 
 gcov_report: test.c
 	$(CC) -fprofile-arcs -ftest-coverage test.c s21_decimal.c -o gcov_report $(CHECK_FLAGS)
